@@ -22,7 +22,7 @@ using namespace HavocNamespace;
 
 enum class Commands {
     CHECKIN                 = 100,
-    CALLBACK                = 10,
+    CALLBACK_FIX                = 10,
     CONSOLE_MESSAGE         = 0x80,
     BOF_CALLBACK            = 0x81,
     SLEEP                   = 11,
@@ -46,7 +46,7 @@ enum class Commands {
     KERBEROS                = 2550,
 
     OUTPUT  = 90,
-    ERROR   = 91,
+    ERROR_FIX   = 91,
     EXIT    = 92,
 };
 

@@ -51,6 +51,7 @@ if(APPLE)
 elseif(UNIX)
   find_package( PythonLibs 3 REQUIRED )
 else()
+  find_package( PythonLibs 3 REQUIRED )
   set( PYTHONLIBS_VERSION_STRING $ENV{PY_VERSION} )
 endif()
 
@@ -63,6 +64,8 @@ if(APPLE)
     include_directories( "${BREW_PREFIX}/Frameworks/Python.framework/Headers" )
 elseif(UNIX)
     include_directories( ${PYTHON_INCLUDE_DIRS} )
+else()
+  include_directories( "<Msys2的Python include目录的绝对路径>" )
 endif()
 
 set( HAVOC_INCLUDE

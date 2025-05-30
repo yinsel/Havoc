@@ -48,11 +48,11 @@ typedef uint32_t            u32;
 typedef uint64_t            u64;
 
 /* windows habit lol */
-typedef char*               PCHAR;
-typedef char                BYTE;
-typedef void*               PVOID;
-typedef void*               LPVOID;
-typedef unsigned long int   UINT_PTR;
+// typedef char*               PCHAR;
+// typedef char                BYTE;
+// typedef void*               PVOID;
+// typedef void*               LPVOID;
+// typedef unsigned long int   UINT_PTR;
 
 /* std typedefs */
 typedef std::map<std::string, std::string> MapStrStr;

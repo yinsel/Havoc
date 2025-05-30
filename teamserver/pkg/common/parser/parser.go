@@ -4,6 +4,8 @@ import (
 	"encoding/binary"
 	"Havoc/pkg/common"
 	"Havoc/pkg/common/crypt"
+	"unicode/utf8"
+	"golang.org/x/text/encoding/simplifiedchinese"
 )
 
 type ReadType int
@@ -191,7 +193,20 @@ func (p *Parser) ParseUTF16String() string {
 }
 
 func (p *Parser) ParseString() string {
-	return common.StripNull(string(p.ParseBytes()))
+    bytes := p.ParseBytes()
+
+    // 检测是否是 UTF-8 编码
+    if utf8.Valid(bytes) {
+        return common.StripNull(string(bytes))
+    }
+
+    // 检测是否是 GBK 编码
+    if decoded, err := simplifiedchinese.GBK.NewDecoder().Bytes(bytes); err == nil {
+        return common.StripNull(string(decoded))
+    }
+
+	// 如果不是 UTF-8 或 GBK 编码，则直接返回原始字节
+    return common.StripNull(string(bytes))
 }
 
 func (p *Parser) Length() int {

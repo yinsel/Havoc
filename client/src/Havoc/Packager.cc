@@ -767,7 +767,7 @@ bool Packager::DispatchSession( Util::Packager::PPackage Package )
 
                             break;
 
-                        case ( int ) Commands::CALLBACK:
+                        case ( int ) Commands::CALLBACK_FIX:
                         {
                             // update the "Last" field on this session
                             auto LastTime     = QString( QByteArray::fromBase64( Output.toLocal8Bit() ) );
