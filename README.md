@@ -31,3 +31,41 @@ endif()
 make client-build-win
 ```
 
+4. 打包
+
+打包相关依赖: 
+
+```
+ldd.exe ./Havoc.exe | grep mingw64 | awk -F\> '{print $2}' | sed 's/ (0x.*//' | xargs -I {} cp {} ./
+```
+
+下载相应的[Python](https://www.python.org/ftp/python/)版本，放置同一目录, 新建`Havoc.bat`及`Havoc.vbs`:
+
+`Havoc.bat`
+
+```
+@echo off
+
+REM 获取python3文件夹的绝对路径
+for %%I in ("%cd%\python3.10.x") do set "PYTHONHOME=%%~fI"
+
+REM 设置PYTHONPATH环境变量
+set "PYTHONPATH=%PYTHONHOME%\lib"
+
+REM 显示设置的环境变量
+echo PYTHONHOME=%PYTHONHOME%
+echo PYTHONPATH=%PYTHONPATH%
+
+havoc.exe
+```
+
+`Havoc.vbs`
+
+```
+set shell=wscript.createObject("wscript.shell")  
+run=shell.Run("Start_Havoc.bat", 0)
+```
+
+5. 运行
+
+执行`Havoc.vbs`即可无窗口启动, 若出现问题建议使用`Havoc.bat`, 可查看到客户端打印的日志。
