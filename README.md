@@ -46,17 +46,25 @@ ldd.exe ./Havoc.exe | grep mingw64 | awk -F\> '{print $2}' | sed 's/ (0x.*//' | 
 ```
 @echo off
 
-REM 获取python3文件夹的绝对路径
-for %%I in ("%cd%\python3.10.x") do set "PYTHONHOME=%%~fI"
+REM 获取当前目录下python3.10.11文件夹的绝对路径
+for %%I in ("%cd%\python3.10.11") do (
+    set "PYTHONHOME=%%~fI"
+    set "PYTHONPATH=%%~fI\lib"
+)
 
-REM 设置PYTHONPATH环境变量
-set "PYTHONPATH=%PYTHONHOME%\lib"
+REM 临时设置PATH变量（将Python路径放在最前面）
+set "PATH=%PYTHONHOME%;%PYTHONHOME%\Scripts;%PATH%"
 
 REM 显示设置的环境变量
 echo PYTHONHOME=%PYTHONHOME%
 echo PYTHONPATH=%PYTHONPATH%
+echo PATH=%PATH%
 
+REM 执行havoc.exe
 havoc.exe
+
+REM 可选：执行完成后恢复原始PATH（如果需要）
+REM set "PATH=%PATH:*python3.10.11;=%"
 ```
 
 `Havoc.vbs`
